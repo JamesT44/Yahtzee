@@ -11,15 +11,12 @@ import { buildPath } from './pathBuilder.js'
         - Log a message to the console to record that a new game was created
 */
 export const newGameController = (req, res) => {
+    const code = generateGameCode()
 
-        const code = generateGameCode()
+    pendingGameStore.add(code, new PendingGame(code))
+    const returnUrl = buildPath('/enter_name.html', { game: code })
 
-        pendingGameStore.add(code, new PendingGame(code))
-        const returnUrl = buildPath('/enter_name.html', { game: code }) 
-    
-        res.redirect(returnUrl)
-    
-        console.log(`New Game created: ${JSON.stringify(req.body)}`)
-        
-    }
+    res.redirect(returnUrl)
 
+    console.log(`New Game created: ${JSON.stringify(req.body)}`)
+}

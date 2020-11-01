@@ -10,10 +10,3 @@ export const getPageQueryParameters = () => {
         }
     }, {})
 }
-<<<<<<< HEAD
-
-/*
-    { game: code }
-*/
-=======
->>>>>>> 89c96d2ae681d99e9d779f206165a2e682b6ab75

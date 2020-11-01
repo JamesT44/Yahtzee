@@ -10,22 +10,23 @@ import { buildPath } from './pathBuilder.js'
         - Redirect the user to lobby.html with the name and game code as query parameters
         - Log a message to the console to record that a new player was added to this game
 */
-export const enterNameController = (req, res) => 
-{
-    
+export const enterNameController = (req, res) => {
+    console.log(req.body)
     const name = req.body.name
-
     const code = req.body.code
 
     console.log(`name: ${name}`)
     console.log(`code: ${code}`)
-    
+
     const pendingGame = pendingGameStore.get(code)
     pendingGame.addPlayer(name)
 
-    const returnUrl = buildPath('/lobby.html', { player: name, game : code, allPlayers: pendingGame.players })
-    res.redirect (returnUrl)
+    const returnUrl = buildPath('/lobby.html', {
+        player: name,
+        game: code,
+        allPlayers: pendingGame.players,
+    })
+    res.redirect(returnUrl)
 
     console.log(`New Player added to game: ${JSON.stringify(req.body)}`)
-
 }
