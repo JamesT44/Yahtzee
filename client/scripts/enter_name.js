@@ -4,5 +4,5 @@ window.onload = () => {
     const code = getPageQueryParameters().game
     const element = document.getElementById('code')
     element.value = code
-    console.log(`Code: ${code}`)
+    console.log(`Joining game with code: ${code}`)
 }

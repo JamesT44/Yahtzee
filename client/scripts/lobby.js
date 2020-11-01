@@ -5,12 +5,10 @@ const receiveLobbyState = async (code) => {
     const state = await apiMessageSender.post('/lobby_state', {
         code: code,
     })
-    console.log(state)
     return state
 }
 
 const pollLobbyState = (code) => {
-    console.log('Polling lobby state')
     setTimeout(async () => {
         const lobbyState = await receiveLobbyState(code)
         const newListOfPlayers = lobbyState.players
@@ -26,6 +24,6 @@ window.onload = () => {
     const code = getPageQueryParameters().game
     const elem = document.getElementById('code')
     elem.innerHTML = 'Code: ' + code
-    console.log(`Code: ${code}`)
+    console.log(`Waiting in lobby with code: ${code}`)
     pollLobbyState(code)
 }

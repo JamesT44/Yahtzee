@@ -1,13 +1,12 @@
 const protocol = window.location.protocol
 const hostname = window.location.hostname
-const port = protocol.startsWith('https') ? "443" : window.location.port
+const port = protocol.startsWith('https') ? '443' : window.location.port
 const apiUrl = `${protocol}//${hostname}:${port}/api`
-console.log(apiUrl)
 
 class ApiMessageSender {
     async get(path) {
         const content = {
-            method: 'GET'
+            method: 'GET',
         }
         return this.send(path, content)
     }
@@ -18,7 +17,7 @@ class ApiMessageSender {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(req)
+            body: JSON.stringify(req),
         }
         return this.send(path, content)
     }

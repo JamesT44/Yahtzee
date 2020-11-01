@@ -102,7 +102,6 @@ const initializeTable = async (code, thisPlayer) => {
 }
 
 const pollGameState = async (code, player) => {
-    console.log('Polling game state')
     setTimeout(async () => {
         const gameState = await receiveGameState(code)
         // const gameState = generateTestGame()
@@ -126,7 +125,7 @@ let diceToKeep = []
 let updateKeptDice = false
 
 const toggleDice = (diceIndex) => {
-    console.log(`Toggle dice${diceIndex}`)
+    console.log(`Toggled dice${diceIndex}`)
     if (diceToKeep.includes(diceIndex)) {
         diceToKeep = diceToKeep.filter((val) => val !== diceIndex)
     } else {

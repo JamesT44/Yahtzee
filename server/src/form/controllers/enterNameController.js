@@ -11,12 +11,8 @@ import { buildPath } from './pathBuilder.js'
         - Log a message to the console to record that a new player was added to this game
 */
 export const enterNameController = (req, res) => {
-    console.log(req.body)
     const name = req.body.name
     const code = req.body.code
-
-    console.log(`name: ${name}`)
-    console.log(`code: ${code}`)
 
     const pendingGame = pendingGameStore.get(code)
     pendingGame.addPlayer(name)
