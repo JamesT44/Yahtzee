@@ -21,13 +21,6 @@ export const lobbyController = (req, res) => {
     pendingGameStore.remove(code)
 
     gameStore.add(code)
-<<<<<<< HEAD
-    
-    const returnUrl = buildPath('/game.html', {game : code})
-    res.redirect (returnUrl)
-    console.log(`Game started: ${JSON.stringify(req.body)}`)
-=======
->>>>>>> 89c96d2ae681d99e9d779f206165a2e682b6ab75
 
     const returnUrl = buildPath('/game.html', {
         game: code,
