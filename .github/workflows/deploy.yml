@@ -23,5 +23,5 @@ jobs:
         run: sudo snap install --classic heroku
 
       - name: Deploy to heroku
-        run: git push https://heroku:$HEROKU_API_KEY@git.heroku.com/softwire-yahtzee.git HEAD:main
+        run: git push https://heroku:$HEROKU_API_KEY@git.heroku.com/yahtzee-james.git HEAD:main
         working-directory: ./Yahtzee
