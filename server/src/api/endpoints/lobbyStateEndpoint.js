@@ -6,7 +6,6 @@ export const lobbyStateEndpoint = (req, res) => {
 
     let currGame
     try {
-        console.log(gameStore)
         currGame = gameStore.get(req.body.code)
     } catch (err) {
         // Ignore any errors thrown by gameStore if code is missing

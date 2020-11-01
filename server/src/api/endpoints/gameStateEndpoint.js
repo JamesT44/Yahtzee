@@ -24,7 +24,7 @@ export const gameStateEndpoint = (req, res) => {
 
     let currGame
     try {
-        currGame = gameStore.get(req.code)
+        currGame = gameStore.get(req.body.game)
     } catch (err) {
         // Ignore any errors thrown by gameStore if code is missing
         currGame = null
