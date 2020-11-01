@@ -11,18 +11,18 @@ import { buildPath } from './pathBuilder.js'
         - Log a message to the console to record that a new player was added to this game
 */
 export const enterNameController = (req, res) => {
+    console.log(`New Player added to game: ${JSON.stringify(req.body)}`)
     const name = req.body.name
     const code = req.body.code
+    const isHost = req.body.host
 
     const pendingGame = pendingGameStore.get(code)
-    pendingGame.addPlayer(name)
+    pendingGame.addPlayer(name, isHost)
 
     const returnUrl = buildPath('/lobby.html', {
         player: name,
         game: code,
-        allPlayers: pendingGame.players,
+        host: isHost,
     })
     res.redirect(returnUrl)
-
-    console.log(`New Player added to game: ${JSON.stringify(req.body)}`)
 }

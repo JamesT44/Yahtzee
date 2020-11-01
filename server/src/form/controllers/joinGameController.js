@@ -12,17 +12,12 @@ import { buildPath } from './pathBuilder.js'
         - Log a message to the console to record that a player requested to join the game
 */
 export const joinGameController = (req, res) => {
-
     const code = req.body.code
-    
 
-    if (pendingGameStore.get(code) === null) {
+    if (pendingGameStore.get(code) == null) {
         res.sendStatus(404)
-    }
-    else {
-    
-        
-        const returnUrl = buildPath('/enter_name.html', { game: code })
+    } else {
+        const returnUrl = buildPath('/enter_name.html', { game: code, host: 0 })
         // generates: /lobby.html?game=code
 
         res.redirect(returnUrl)

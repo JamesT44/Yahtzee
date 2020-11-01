@@ -55,8 +55,11 @@
         </tbody>
     </table> <br><br>
     
-    <form method="POST" >
-        <input type = "submit" text= "Start" class="main-button" id = "Start">
+    <form method="POST" id="startgame-form">
+        <input type="hidden" id="code-input" name="code">
+        <input type="hidden" id="player-input" name="player">
+        <input type="hidden" id="host-input" name="host">
+        <input type="submit" text="Start" class="main-button" id="start-input">
     </form>
 
     <script src="scripts/lobby.js" type="module"></script>

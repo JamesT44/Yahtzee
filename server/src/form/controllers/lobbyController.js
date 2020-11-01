@@ -17,14 +17,21 @@ import { buildPath } from './pathBuilder.js'
 */
 export const lobbyController = (req, res) => {
     const code = req.body.code
+    console.log(req.body)
 
-    pendingGameStore.remove(code)
-
-    gameStore.add(code)
+    if (Number(req.body.host)) {
+        const players = pendingGameStore.get(code).players
+        gameStore.add(code, new Game(code, players))
+        pendingGameStore.remove(code)
+        console.log(`Game started: ${JSON.stringify(req.body)}`)
+    } else {
+        console.log(`Joined started game: ${JSON.stringify(req.body)}`)
+    }
 
     const returnUrl = buildPath('/game.html', {
         game: code,
-        name: req.body.name,
+        name: req.body.player,
     })
-    console.log(`Game started: ${JSON.stringify(req.body)}`)
+    console.log(req.body)
+    res.redirect(returnUrl)
 }

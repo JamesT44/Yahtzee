@@ -16,14 +16,36 @@ const pollLobbyState = (code) => {
             const playerCells = document.getElementsByClassName('PlayerName')[i]
             playerCells.innerHTML = `${newListOfPlayers[i]}`
         }
+        console.log(lobbyState)
+        if (lobbyState.started) {
+            document.getElementById('startgame-form').submit()
+        }
         pollLobbyState(code)
     }, 500)
 }
 
 window.onload = () => {
     const code = getPageQueryParameters().game
+    const player = getPageQueryParameters().player
+    const isHost = Number(getPageQueryParameters().host)
+
     const elem = document.getElementById('code')
     elem.innerHTML = 'Code: ' + code
+
+    const elem2 = document.getElementById('code-input')
+    elem2.value = code
+
+    const elem3 = document.getElementById('player-input')
+    elem3.value = player
+
+    const elem4 = document.getElementById('host-input')
+    elem4.value = isHost
+
+    if (!isHost) {
+        const elem4 = document.getElementById('start-input')
+        elem4.style.visibility = 'hidden'
+    }
+
     console.log(`Waiting in lobby with code: ${code}`)
     pollLobbyState(code)
 }
