@@ -6,12 +6,12 @@ export class Game {
     constructor(code, players) {
         this.code = code
         this.players = players
+        this.currentPlayerCounter = 0
         this.currentPlayer = players[this.currentPlayerCounter]
         this.rollsRemaining = 3
         this.currentDice = [1, 2, 3, 4, 5]
         this.diceKept = []
         this.scorecards = {}
-        this.currentPlayerCounter = 0
 
         for (const key of this.players) {
             this.scorecards[key] = new Scorecard()
@@ -23,7 +23,7 @@ export class Game {
     }
 
     keepDice(diceToKeep) {
-        this.diceKept = diceToKeep
+        this.diceKept = [...diceToKeep]
     }
 
     canRoll() {
@@ -31,33 +31,13 @@ export class Game {
     }
 
     rollDice() {
+        console.log(`Rolling dice`)
         for (let i = 0; i < 5; i++) {
             if (!this.diceKept.includes(i)) {
                 this.currentDice[i] = Math.floor(Math.random() * 6) + 1
             }
         }
-        // const Dice = this.currentDice.length() - this.diceKept.length()
-        // let DiceNumbers = []
-        // let i2 = 0
-        // while (i2 !== Dice) {
-        //     DiceNumbers.push()
-        //     i++
-        // }
-
-        // this.currentDice = DiceNumbers
-
-        // for (const key of players){
-        //     if (this.currentPlayer === key){
-        //         if (this.canRoll()){
-        //             this.rollsRemaining -= 1
-        //             return true
-        //         }
-        //         else{
-        //             return false
-        //         }
-        //     }
-        //     continue
-        // }
+        this.rollsRemaining--
     }
 
     canScore() {
@@ -85,6 +65,9 @@ export class Game {
         if (this.currentPlayerCounter + 1 === this.players.length()) {
             this.currentPlayerCounter = 0
         }
+        this.rollsRemaining = 3
+        this.currentDice = [1, 2, 3, 4, 5]
+        this.diceKept = []
     }
 
     gameIsOver() {

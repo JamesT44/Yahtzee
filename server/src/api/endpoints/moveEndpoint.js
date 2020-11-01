@@ -20,10 +20,10 @@ export const moveEndpoint = (req, res) => {
 
     let currGame
     try {
-        const currGame = gameStore.get(req.code)
+        currGame = gameStore.get(req.body.game)
     } catch (err) {
         // Ignore any errors thrown by gameStore if code is missing
-        const currGame = null
+        currGame = null
     }
 
     // Return 400 if game object is null or undefined
@@ -33,49 +33,36 @@ export const moveEndpoint = (req, res) => {
     }
 
     // Return 400 if it is not their turn
-    if (currGame.currentPlayer !== req.player) {
+    if (currGame.currentPlayer !== req.body.player) {
         res.sendStatus(400)
         return
     }
 
     // Return 400 if the move is both of rolling and scoring
-    if (req.roll && req.score) {
+    if (req.body.roll && req.body.score) {
         res.sendStatus(400)
         return
     }
 
-    if (!req.roll && !req.score) {
+    if (!req.body.roll && !req.body.score) {
         // Return 400 if trying to mark dice to keep when no rolls are left
         if (!currGame.canRoll()) {
             res.sendStatus(400)
             return
         }
-        currGame.keepDice(req.keep)
-    } else if (req.roll) {
+        currGame.keepDice(req.body.keep)
+        res.sendStatus(200)
+    } else if (req.body.roll) {
         // Return 400 if trying to roll when no rolls are left
         if (!currGame.canRoll()) {
             res.sendStatus(400)
             return
         }
 
-        if (keep in req) {
-            // Return 400 if dice to keep are not present in currentDice
-            if (
-                req.keep.some(
-                    (val) =>
-                        currGame.currentDice.filter((el) => el == val).length <
-                        req.keep.filter((el) => el == val).length
-                )
-            ) {
-                res.sendStatus(400)
-                return
-            }
-        } else {
-            currGame.keepDice(req.keep)
-        }
-
         currGame.rollDice()
+        console.log('worked')
         res.sendStatus(200)
+        res.json({ test: 0 })
     } else {
         // Return 400 if trying to score before rolling
         if (!currGame.canScore()) {
@@ -83,7 +70,7 @@ export const moveEndpoint = (req, res) => {
             return
         }
 
-        currGame.scoreInCategory(req.score)
+        currGame.scoreInCategory(req.body.score)
         res.sendStatus(200)
     }
 }

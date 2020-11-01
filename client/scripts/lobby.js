@@ -16,7 +16,6 @@ const pollLobbyState = (code) => {
             const playerCells = document.getElementsByClassName('PlayerName')[i]
             playerCells.innerHTML = `${newListOfPlayers[i]}`
         }
-        console.log(lobbyState)
         if (lobbyState.started) {
             document.getElementById('startgame-form').submit()
         }

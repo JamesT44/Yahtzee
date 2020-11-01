@@ -19,18 +19,20 @@ class ApiMessageSender {
             },
             body: JSON.stringify(req),
         }
-        return this.send(path, content)
+        return this.send(path, content).catch((reason) =>
+            console.log(reason.message)
+        )
     }
 
     async send(path, content) {
         let res = await fetch(`${apiUrl}${path}`, content)
-
         if (res.status !== 200) {
             return null
             throw new Error('No response received')
         }
-
-        return res.json()
+        let data = await res.json()
+        console.log(data)
+        return data
     }
 }
 

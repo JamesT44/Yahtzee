@@ -50,14 +50,8 @@ const generateTestGame = () => {
     return gameState
 }
 
-const UpdateDice = (diceValues) => {
-    for (let i = 0; i < diceValues.length; i++) {
-        const img = document.getElementById(`dice-${i}`)
-        img.src = './images/dice_' + diceValues[i] + '.png'
-    }
-}
-
 const postMove = async (move) => {
+    console.log(move)
     await apiMessageSender.post('/move', move)
 }
 
@@ -103,41 +97,73 @@ const initializeTable = async (code, thisPlayer) => {
 
 const pollGameState = async (code, player) => {
     setTimeout(async () => {
-        const gameState = await receiveGameState(code)
+        let gameState = await receiveGameState(code)
         // const gameState = generateTestGame()
         if (updateKeptDice) {
-            postMove({
-                game: code,
-                player: player,
-                keep: diceToKeep,
-                roll: false,
-                score: null,
-            })
-
-            updateKeptDice = false
+            try {
+                postMove({
+                    game: code,
+                    player: player,
+                    keep: diceToKeep,
+                    roll: false,
+                    score: null,
+                })
+                gameState = await receiveGameState(code)
+            } finally {
+                updateKeptDice = false
+            }
         }
         updatePageWithNewState(gameState, player)
         pollGameState(code, player)
-    }, 500)
+    }, 50)
 }
 
 let diceToKeep = []
 let updateKeptDice = false
+let canKeep = false
+let canScore = false
 
-const toggleDice = (diceIndex) => {
-    console.log(`Toggled dice${diceIndex}`)
+const toggleDice = (e, diceIndex) => {
+    if (!canKeep) {
+        return
+    }
+    console.log(`Toggled dice ${diceIndex}`)
     if (diceToKeep.includes(diceIndex)) {
         diceToKeep = diceToKeep.filter((val) => val !== diceIndex)
+        e.currentTarget.classList.remove('kept')
     } else {
         diceToKeep.push(diceIndex)
+        e.currentTarget.classList.add('kept')
     }
     updateKeptDice = true
 }
 
+const scoreCategory = (e, category) => {
+    if (!canScore) {
+        return
+    }
+    console.log(`Scored in category ${category}`)
+}
+
+const initCallbacks = (code, player) => {
+    const diceButtons = document.getElementsByClassName('dice_button')
+    Array.prototype.map.call(diceButtons, (button, i) => {
+        button.addEventListener('click', (e) => toggleDice(e, i))
+    })
+    const rollButton = document.getElementById('roll_button')
+    rollButton.addEventListener('click', () => {
+        postMove({
+            game: code,
+            player: player,
+            roll: true,
+            category: null,
+        })
+    })
+}
+
 window.onload = () => {
     const { name: player, game: code } = getPageQueryParameters()
-    const buttons = document.getElementsByClassName('dice_button')
-
+    initCallbacks(code, player)
     initializeTable(code, player)
     pollGameState(code, player)
 }
@@ -155,11 +181,22 @@ const updateScorecards = (
             const element = document.getElementsByClassName(
                 `player-${player} ${category}`
             )[0]
-            element.textContent = cellValue
+            if (
+                currentPlayer === player &&
+                currentPlayer === currentTurn &&
+                !computedCategories.includes(category) &&
+                canScore &&
+                cellValue === '-'
+            ) {
+                element.textContent = '0'
+            } else {
+                element.textContent = cellValue
+            }
             element.disabled =
                 currentPlayer !== player ||
                 currentPlayer !== currentTurn ||
-                computedCategories.includes(category)
+                computedCategories.includes(category) ||
+                !canScore
         }
     }
 }
@@ -175,6 +212,7 @@ const updateDice = (dice, diceKept) => {
                 .getElementById(`dice${i + 1}button`)
                 .classList.remove('kept')
         }
+        diceToKeep = diceKept
     }
 }
 
@@ -186,6 +224,10 @@ const updatePageWithNewState = (state, player) => {
         state.currentPlayer
     )
     updateDice(state.currentDice, state.diceKept)
+    canKeep = state.canKeep && state.currentPlayer == player
+    canScore = state.canScore && state.currentPlayer == player
+    document.getElementById('roll_button').style.visibility =
+        state.canRoll && state.currentPlayer == player ? 'visible' : 'hidden'
 }
 
 /*
@@ -198,5 +240,3 @@ const updatePageWithNewState = (state, player) => {
     } to /move endpoint by calling postMove()
 
 */
-
-// const DiceButton = (diceValue) => {}

@@ -20,7 +20,7 @@ export const gameStateEndpoint = (req, res) => {
     // game.scorecards[game.currentPlayer].scores['ones'] = 5
     // res.json(game)
 
-    console.log(`Game state request: ${JSON.stringify(req.body)}`)
+    // console.log(`Game state request: ${JSON.stringify(req.body)}`)
 
     let currGame
     try {
