@@ -22,7 +22,7 @@ A multiplayer Yahtzee web app.
 
 4. Login by running `heroku login`
 
-5. Run `heroku authorizations:create` to generate a new API key. Make a note of the `token`.
+5. Run `heroku authorizations:create` to generate an API key. Make a note of the `token`.
 
 6. In your github repo, go to settings > secrets and add a new secret called `HEROKU_API_KEY` and give it the value of your token.
 
