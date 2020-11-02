@@ -18,14 +18,12 @@
 button.category-button {
     min-width: 2rem;
     background-color: white; /* button background */
-    color: red; /* label colour */
-    border: none; /* 2px blue line border */
-    padding: 10px 20px;
-    border-radius: 10px; /* rounded corner style */
+    color: black; /* label colour */
+    border: none;
 }
 
-button.category-button:disabled {
-    color: black;
+button.category-button.highlighted {
+    color: red;
 }
 
 #dice_container {

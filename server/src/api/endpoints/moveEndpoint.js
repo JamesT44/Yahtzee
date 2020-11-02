@@ -51,6 +51,7 @@ export const moveEndpoint = (req, res) => {
             return
         }
         currGame.keepDice(req.body.keep)
+        console.log(`Kept dice`)
         res.sendStatus(200)
     } else if (req.body.roll) {
         // Return 400 if trying to roll when no rolls are left
@@ -60,9 +61,8 @@ export const moveEndpoint = (req, res) => {
         }
 
         currGame.rollDice()
-        console.log('worked')
+        console.log(`Rolled dice`)
         res.sendStatus(200)
-        res.json({ test: 0 })
     } else {
         // Return 400 if trying to score before rolling
         if (!currGame.canScore()) {
@@ -71,6 +71,7 @@ export const moveEndpoint = (req, res) => {
         }
 
         currGame.scoreInCategory(req.body.score)
+        console.log(`Scored in category ${req.body.score}`)
         res.sendStatus(200)
     }
 }

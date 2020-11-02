@@ -12,9 +12,15 @@ const pollLobbyState = (code) => {
     setTimeout(async () => {
         const lobbyState = await receiveLobbyState(code)
         const newListOfPlayers = lobbyState.players
+        let playerCells = document.getElementsByClassName('PlayerName')
+        while (playerCells.length < newListOfPlayers.length) {
+            let elem = document.createElement('tr')
+            elem.innerHTML = '<td><span class="PlayerName"></span></td>'
+            document.getElementsByTagName('tbody')[0].appendChild(elem)
+            playerCells = document.getElementsByClassName('PlayerName')
+        }
         for (let i = 0; i < newListOfPlayers.length; i++) {
-            const playerCells = document.getElementsByClassName('PlayerName')[i]
-            playerCells.innerHTML = `${newListOfPlayers[i]}`
+            playerCells[i].innerHTML = `${newListOfPlayers[i]}`
         }
         if (lobbyState.started) {
             document.getElementById('startgame-form').submit()

@@ -43,13 +43,6 @@ export class Scorecard {
     }
 
     toJSON() {
-        const categoryList = [
-            this.topHalfSum(),
-            this.bonus(),
-            this.topHalfTotal(),
-            this.bottomHalfTotal(),
-            this.overallTotal(),
-        ]
         const json = { ...this.scores }
 
         for (let i = 0; i < computedCategories.length; i++) {

@@ -6,8 +6,8 @@ export class Game {
     constructor(code, players) {
         this.code = code
         this.players = players
+        this.currentPlayer = players[0]
         this.currentPlayerCounter = 0
-        this.currentPlayer = players[this.currentPlayerCounter]
         this.rollsRemaining = 3
         this.currentDice = [1, 2, 3, 4, 5]
         this.diceKept = []
@@ -48,7 +48,6 @@ export class Game {
         if (!this.canScore()) {
             return null
         }
-
         return possibleScoreCalculator.allPossibleScores(
             this.scorecards[this.currentPlayer],
             this.currentDice
@@ -57,27 +56,35 @@ export class Game {
 
     scoreInCategory(category) {
         let thisScorecard = this.scorecards[this.currentPlayer]
+        console.log(thisScorecard)
 
         const score = this.possibleScores()[category]
-        thisScorecard[category] = score
+        thisScorecard.scores[category] = score
 
-        this.currentPlayerCounter += 1
-        if (this.currentPlayerCounter + 1 === this.players.length()) {
-            this.currentPlayerCounter = 0
-        }
+        this.currentPlayerCounter++
+        this.currentPlayerCounter %= this.players.length
+        this.currentPlayer = this.players[this.currentPlayerCounter]
         this.rollsRemaining = 3
         this.currentDice = [1, 2, 3, 4, 5]
         this.diceKept = []
     }
 
-    gameIsOver() {
-        for (const category of scoringCategories)
-            for (const player of this.players) {
-                if (this.scorecards[player][category] === null) {
-                    return false
+    winner() {
+        let maxScore = 0
+        let winner = ''
+        for (const player of this.players) {
+            console.log(this.scorecards[player].overallTotal())
+            for (const category of scoringCategories) {
+                if (this.scorecards[player].scores[category] === null) {
+                    return null
                 }
             }
-        return true
+            if (this.scorecards[player].overallTotal() > maxScore) {
+                maxScore = this.scorecards[player].overallTotal()
+                winner = player
+            }
+        }
+        return winner
     }
 
     toJSON() {
@@ -94,7 +101,7 @@ export class Game {
         json.canRoll = this.canRoll()
         json.canScore = this.canScore()
         json.possibleScores = this.possibleScores()
-        json.gameIsOver = this.gameIsOver()
+        json.winner = this.winner()
 
         return json
     }

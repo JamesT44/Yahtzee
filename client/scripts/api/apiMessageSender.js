@@ -19,9 +19,7 @@ class ApiMessageSender {
             },
             body: JSON.stringify(req),
         }
-        return this.send(path, content).catch((reason) =>
-            console.log(reason.message)
-        )
+        return this.send(path, content).catch()
     }
 
     async send(path, content) {
@@ -30,9 +28,7 @@ class ApiMessageSender {
             return null
             throw new Error('No response received')
         }
-        let data = await res.json()
-        console.log(data)
-        return data
+        return res.json()
     }
 }
 
