@@ -17,7 +17,6 @@ import { buildPath } from './pathBuilder.js'
 */
 export const lobbyController = (req, res) => {
     const code = req.body.code
-    console.log(req.body)
 
     if (Number(req.body.host)) {
         const players = pendingGameStore.get(code).players
@@ -32,6 +31,5 @@ export const lobbyController = (req, res) => {
         game: code,
         name: req.body.player,
     })
-    console.log(req.body)
     res.redirect(returnUrl)
 }

@@ -20,6 +20,7 @@ button.category-button {
     background-color: white; /* button background */
     color: black; /* label colour */
     border: none;
+    outline: none;
 }
 
 button.category-button.highlighted {
@@ -43,6 +44,7 @@ button.category-button.highlighted {
     padding-top: 5px;
     border: none;
     background-color: rgb(7, 70, 7);
+    outline: none;
 }
 .kept {
     opacity: 0.5;

@@ -19,7 +19,7 @@ class ApiMessageSender {
             },
             body: JSON.stringify(req),
         }
-        return this.send(path, content).catch()
+        return this.send(path, content)
     }
 
     async send(path, content) {

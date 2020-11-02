@@ -51,7 +51,7 @@ const generateTestGame = () => {
 }
 
 const postMove = async (move) => {
-    await apiMessageSender.post('/move', move)
+    await apiMessageSender.post('/move', move).catch((err) => {})
 }
 
 const receiveGameState = async (code) => {
@@ -116,6 +116,7 @@ const pollGameState = async (code, player) => {
             }
         }
         if (gameState.winner !== null) {
+            console.log(`Game over: ${gameState.winner} won`)
             const rollButton = document.getElementById('roll_button')
             rollButton.style.visibility = 'hidden'
 
