@@ -116,7 +116,6 @@ const pollGameState = async (code, player) => {
             }
         }
         if (gameState.winner !== null) {
-            console.log(gameState)
             const rollButton = document.getElementById('roll_button')
             rollButton.style.visibility = 'hidden'
 

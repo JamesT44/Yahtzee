@@ -31,7 +31,6 @@ export class Game {
     }
 
     rollDice() {
-        console.log(`Rolling dice`)
         for (let i = 0; i < 5; i++) {
             if (!this.diceKept.includes(i)) {
                 this.currentDice[i] = Math.floor(Math.random() * 6) + 1
