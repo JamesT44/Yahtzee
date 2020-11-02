@@ -115,6 +115,7 @@ const pollGameState = async (code, player) => {
                 updateKeptDice = false
             }
         }
+        updatePageWithNewState(gameState, player)
         if (gameState.winner !== null) {
             console.log(`Game over: ${gameState.winner} won`)
             const rollButton = document.getElementById('roll_button')
@@ -127,7 +128,6 @@ const pollGameState = async (code, player) => {
             rollButton.parentElement.insertBefore(gameOverMsg, rollButton)
             return
         }
-        updatePageWithNewState(gameState, player)
         pollGameState(code, player)
     }, 50)
 }

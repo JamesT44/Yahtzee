@@ -17,22 +17,22 @@
 /* * { border: 1px solid black; } */
 
 :root {
-    
     font-family: 'Noto Sans', sans-serif;
     font-style: normal;
     font-variant: normal;
 }
 
-html, body {
+html,
+body {
     height: 100%;
-    background: #00BFFF;  /* fallback for old browsers */
+    background: #00bfff; /* fallback for old browsers */
 }
 
 p {
     font-size: 14px;
     font-weight: 400;
     line-height: 20px;
-} 
+}
 /*.title_container
 {
     padding-bottom: 25px;
@@ -43,43 +43,35 @@ p {
     width: 40%;
 }*/
 
-.title_container h1{
-    
-
+.title_container h1 {
     display: flex;
     justify-content: center;
     align-items: center;
     color: white;
     font-size: 50px;
     text-align: center;
-    padding-top:20px;
+    padding-top: 20px;
 }
-
-
-
 
 .main-button {
     font-size: 40px;
     font-family: 'Noto Sans', sans-serif;
-    text-align:center;
-    text-decoration:none;
+    text-align: center;
+    text-decoration: none;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
     padding-bottom: 10px;
     outline: none;
-    background:white;
+    background: white;
     border: 1px solid black;
     border-radius: 30px;
-}​
-
-
-
-a:link, a:visited {
-    color: black;
 }
 
+a {
+    color: black;
+}
 
 /* noto-sans-regular - latin */
 @font-face {
@@ -87,33 +79,37 @@ a:link, a:visited {
     font-style: normal;
     font-weight: 400;
     src: local('Noto Sans'), local('NotoSans'),
-         url('../fonts/noto-sans-v11-latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-         url('../fonts/noto-sans-v11-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-  }
-  /* noto-sans-italic - latin */
-  @font-face {
+        url('../fonts/noto-sans-v11-latin-regular.woff2') format('woff2'),
+        /* Chrome 26+, Opera 23+, Firefox 39+ */
+            url('../fonts/noto-sans-v11-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+/* noto-sans-italic - latin */
+@font-face {
     font-family: 'Noto Sans';
     font-style: italic;
     font-weight: 400;
     src: local('Noto Sans Italic'), local('NotoSans-Italic'),
-         url('../fonts/noto-sans-v11-latin-italic.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-         url('../fonts/noto-sans-v11-latin-italic.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-  }
-  /* noto-sans-700 - latin */
-  @font-face {
+        url('../fonts/noto-sans-v11-latin-italic.woff2') format('woff2'),
+        /* Chrome 26+, Opera 23+, Firefox 39+ */
+            url('../fonts/noto-sans-v11-latin-italic.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+/* noto-sans-700 - latin */
+@font-face {
     font-family: 'Noto Sans';
     font-style: normal;
     font-weight: 700;
     src: local('Noto Sans Bold'), local('NotoSans-Bold'),
-         url('../fonts/noto-sans-v11-latin-700.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-         url('../fonts/noto-sans-v11-latin-700.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-  }
-  /* noto-sans-700italic - latin */
-  @font-face {
+        url('../fonts/noto-sans-v11-latin-700.woff2') format('woff2'),
+        /* Chrome 26+, Opera 23+, Firefox 39+ */
+            url('../fonts/noto-sans-v11-latin-700.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+/* noto-sans-700italic - latin */
+@font-face {
     font-family: 'Noto Sans';
     font-style: italic;
     font-weight: 700;
     src: local('Noto Sans Bold Italic'), local('NotoSans-BoldItalic'),
-         url('../fonts/noto-sans-v11-latin-700italic.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-         url('../fonts/noto-sans-v11-latin-700italic.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-  }
+        url('../fonts/noto-sans-v11-latin-700italic.woff2') format('woff2'),
+        /* Chrome 26+, Opera 23+, Firefox 39+ */
+            url('../fonts/noto-sans-v11-latin-700italic.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
