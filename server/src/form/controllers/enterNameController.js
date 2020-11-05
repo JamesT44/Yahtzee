@@ -18,6 +18,7 @@ export const enterNameController = (req, res) => {
 
     const pendingGame = pendingGameStore.get(code)
     pendingGame.addPlayer(name, isHost)
+    console.log(pendingGameStore.contents)
 
     const returnUrl = buildPath('/lobby.html', {
         player: name,
