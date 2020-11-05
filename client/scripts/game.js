@@ -73,7 +73,7 @@ const initializeTable = async (code, thisPlayer) => {
             if (i) {
                 const button = document.createElement('button')
                 button.classList.add('category-button')
-                button.classList.add('player-' + player)
+                button.classList.add('player-' + player.replace(' ', ''))
                 button.classList.add(orderedCategories[i - 1])
                 button.addEventListener('click', (e) =>
                     scoreCategory(e, orderedCategories[i - 1], code, thisPlayer)
@@ -200,7 +200,7 @@ const updateScorecards = (
         for (const category of orderedCategories) {
             const cellValue = (scorecards[player][category] ?? '-').toString()
             const element = document.getElementsByClassName(
-                `player-${player} ${category}`
+                `player-${player.replace(' ', '')} ${category}`
             )[0]
             element.textContent = cellValue
             element.disabled =
