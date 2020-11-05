@@ -19,7 +19,7 @@ export const lobbyController = (req, res) => {
     const code = req.body.code
 
     if (Number(req.body.host)) {
-        console.log(`pendingGameStore: ${pendingGameStore.contents}`)
+        console.log(pendingGameStore.contents)
         const players = pendingGameStore.get(code).players
         gameStore.add(code, new Game(code, players))
         pendingGameStore.remove(code)
